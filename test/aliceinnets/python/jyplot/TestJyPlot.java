@@ -31,16 +31,18 @@ public class TestJyPlot extends TestCase {
 			}
 		}
 		
-		
 		new JyPlot()
 		.write("from matplotlib import cm\n")
 		.figure()
+		.subplot(2,2,1)
 		.hist(z, 30)
 		.grid()
-		.figure()
+//		.figure()
+		.subplot(2,2,2)
 		.scatter(y, z)
 		.grid()
-		.figure()
+//		.figure()
+		.subplot(2,2,3)
 		.plot(x, y, "'o'")
 		.plot(x, z, "label='a'")
 		.grid()
@@ -49,17 +51,17 @@ public class TestJyPlot extends TestCase {
 		.ylim(-2.0, 2.0)
 		.legend("loc='lower left'")
 		.savefig("r'"+PythonScript.DEFAULT_PATH+System.nanoTime()+".pdf'")
-		.figure()
+//		.figure()
+		.subplot(2,2,4)
 //		.contourf(f, "cmap = cm.jet")
 		.contourf(x, x, f, 50, "cmap = cm.jet")
 		.colorbar()
 		.grid()
 		.xlabel("'$T_e$ [keV]'")
 		.ylabel("'$n_e$ [$10^{19} m^{-3}$]'")
-		.savefig("r'"+PythonScript.DEFAULT_PATH+System.nanoTime()+".pdf'")
+//		.savefig("r'"+PythonScript.DEFAULT_PATH+System.nanoTime()+".pdf'")
 		.tight_layout()
-//		.rc()
-		.show()
+//		.show()
 		.exec();
 	}
 
