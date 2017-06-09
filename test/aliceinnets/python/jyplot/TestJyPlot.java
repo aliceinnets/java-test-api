@@ -1,15 +1,13 @@
 package aliceinnets.python.jyplot;
 
-import java.io.IOException;
-
-import aliceinnets.python.PythonScript;
+import aliceinnets.python.PythonScriptUtil;
 import aliceinnets.util.OneLiners;
 import junit.framework.TestCase;
 
 public class TestJyPlot extends TestCase {
 	
-	public void testJyPlot() throws IOException {
-		double[] x = OneLiners.linspace(0, 10, 1000);
+	public void testJyPlot() {
+		double[] x = OneLiners.linspace(0, 10, 100);
 		double[] y = new double[x.length];
 		for (int i = 0; i < y.length; i++) {
 			y[i] = Math.sin(x[i]);
@@ -31,8 +29,10 @@ public class TestJyPlot extends TestCase {
 			}
 		}
 		
+//		JyPlot.setPythonPath("/usr/local/bin/python3");
+		
 		new JyPlot()
-		.write("from matplotlib import cm\n")
+		.write("from matplotlib import cm")
 		.figure()
 		.subplot(2,2,1)
 		.hist(z, 30)
@@ -46,8 +46,8 @@ public class TestJyPlot extends TestCase {
 		.plot(x, y, "o")
 		.plot(x, z, "label='a'")
 		.grid()
-		.xlabel("'$f$'")
-		.ylabel("'$A$'")
+		.xlabel("$f$")
+		.ylabel("$A$")
 		.ylim(-2.0, 2.0)
 		.legend("loc='lower left'")
 //		.savefig("r'"+PythonScript.DEFAULT_PATH+System.nanoTime()+".pdf'")
@@ -57,11 +57,11 @@ public class TestJyPlot extends TestCase {
 		.contourf(x, x, f, 50, "cmap = cm.jet")
 		.colorbar()
 		.grid()
-		.xlabel("'$T_e$ [keV]'")
-		.ylabel("'$n_e$ [$10^{19} m^{-3}$]'")
-		.savefig("r'"+PythonScript.DEFAULT_PATH+System.nanoTime()+".pdf'")
+		.xlabel("$T_e$ [keV]")
+		.ylabel("$n_e$ [$10^{19} m^{-3}$]")
+		.savefig("r'"+PythonScriptUtil.DEFAULT_PATH+System.nanoTime()+".pdf'")
 		.tight_layout()
-//		.show()
+		.show()
 		.exec();
 	}
 
